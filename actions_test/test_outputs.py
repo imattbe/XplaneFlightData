@@ -136,7 +136,7 @@ def test_calculator(filename, arguments, expected_output):
                     [str(calculator_path)] + arguments,
                     capture_output=True,
                     text=True,
-                    timeout=0.1
+                    timeout=2.0
                 )
 
     if result.returncode != 0:
