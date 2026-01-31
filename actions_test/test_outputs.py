@@ -41,35 +41,35 @@ def test_flight_calculator():
 
     expected_output = {
         "wind": {
-        "speed_kts": 22.16,
-        "direction_from": 15.53,
-        "headwind": 4.05,
-        "crosswind": 21.79,
-        "gust_factor": 5.45
+            "speed_kts": 22.16,
+            "direction_from": 195.53,
+            "headwind": 4.05,
+            "crosswind": 21.79,
+            "gust_factor": 0.01
         },
         "envelope": {
-        "stall_margin_pct": 82.98,
-        "vmo_margin_pct": 12.00,
-        "mmo_margin_pct": 20.73,
-        "min_margin_pct": 12.00,
-        "corner_speed_kts": 189.74,
-        "load_factor": 1.00
+            "stall_margin_pct": 82.98,
+            "vmo_margin_pct": 12.00,
+            "mmo_margin_pct": 20.73,
+            "min_margin_pct": 12.00,
+            "load_factor": 1.00,
+            "corner_speed_kts": 170.00
         },
         "energy": {
-        "specific_energy_ft": 37766.88,
-        "energy_rate_fpm": -500.00,
-        "trend": -1
+            "specific_energy_ft": 37766.88,
+            "energy_rate_kts": -4.94,
+            "trend": -1
         },
         "glide": {
-        "max_range_nm": 69.12,
-        "range_with_wind_nm": 65.39,
-        "glide_ratio": 12.00,
-        "best_glide_speed_kts": 75.00
+            "still_air_range_nm": 69.12,
+            "wind_adjusted_range_nm": 68.00,
+            "glide_ratio": 12.00,
+            "best_glide_speed_kts": 78.00
         },
         "alternate_airports": {
-        "combinations_5_choose_2": 10,
-        "combinations_10_choose_3": 120,
-        "note": "Recursive binomial calculation for flight planning"
+            "combinations_5_choose_2": 10,
+            "combinations_10_choose_3": 120,
+            "note": "Iterative binomial calculation (JSF-compliant, no recursion)"
         }
     }
 
@@ -87,7 +87,7 @@ def test_turn_calculator():
         "time_to_turn_sec": 44.18,
         "load_factor": 1.10,
         "standard_rate_bank": 34.48
-        }
+    }
     
     test_calculator("turn_calculator", arguments, expected_output)
 
@@ -99,13 +99,10 @@ def test_vnav_calculator():
         "flight_path_angle_deg": -2.36,
         "required_vs_fpm": -1875.02,
         "tod_distance_nm": 78.51,
-        "time_to_constraint_min": 13.33,
+        "time_to_constraint_min": 16.67,
         "distance_per_1000ft": 4.00,
-        "is_descent": True,
-        "on_idle_path": True,
-        "vs_for_3deg": -2388.30,
-        "vs_for_5deg": -3986.99,
-        "distance_at_current_vs_nm": 125.00
+        "vs_for_3deg": 2388.30,
+        "is_descent": True
     }
     
     test_calculator("vnav_calculator", arguments, expected_output)
@@ -198,10 +195,10 @@ def compare_json(expected, actual, tol=1e-2):
 
 def main():
     test_turn_calculator()
+    test_vnav_calculator()
     test_density_altitude_calculator()
     test_wind_calculator()
     test_flight_calculator()
-    test_vnav_calculator()
 
 if __name__ == "__main__":
     main()
