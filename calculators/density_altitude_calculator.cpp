@@ -26,6 +26,7 @@
 #include <iomanip>
 #include <cstring>
 #include <cstdlib>
+#include <vector>
 #include <memory>
 #include "jsf_types.h"
 
