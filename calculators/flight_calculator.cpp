@@ -117,14 +117,23 @@ Float64 normalize_angle(Float64 angle) {
  *          (5 nearby airports, choose 2 as alternates = 10 possible combinations)
  */
 [[nodiscard]] unsigned long long binomial_coefficient(unsigned int n, unsigned int k) {
+    // non recursive
+    
+    unsigned long long value = 1;
+    for(int i = 0; i < k; i++) {
+        value = value * (n-i)/(i+1);
+    }
+
+    return value;
+
     // Base cases
-    if (k > n) return 0;           // Can't choose more than available
-    if (k == 0 || k == n) return 1; // C(n,0) = C(n,n) = 1
-    if (k == 1) return n;           // C(n,1) = n
+    //if (k > n) return 0;           // Can't choose more than available
+    //if (k == 0 || k == n) return 1; // C(n,0) = C(n,n) = 1
+    //if (k == 1) return n;           // C(n,1) = n
     
     // Recursive relation: C(n,k) = C(n-1,k-1) + C(n-1,k)
     // This represents: either include current item or don't
-    return binomial_coefficient(n - 1, k - 1) + binomial_coefficient(n - 1, k);
+    //return binomial_coefficient(n - 1, k - 1) + binomial_coefficient(n - 1, k);
 }
 
 // 1. Wind vector calculation
